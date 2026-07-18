@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>لوحة تحكم مقدم الخدمة</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<header class="bg-white shadow-sm">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+    <a href="index.html" class="text-blue-600 font-bold">← عودة للرئيسية</a>
+    <button id="logoutBtn" class="text-sm text-red-500 hidden">تسجيل خروج</button>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-8">
+
+  <!-- نموذج تسجيل الدخول / إنشاء حساب -->
+  <section id="authSection" class="bg-white rounded-xl shadow-sm p-6 mb-6">
+    <div class="flex gap-4 mb-4 border-b">
+      <button id="tabLogin" class="pb-2 border-b-2 border-blue-600 font-medium">تسجيل دخول</button>
+      <button id="tabRegister" class="pb-2 text-gray-400">حساب جديد</button>
+    </div>
+
+    <form id="loginForm" class="flex flex-col gap-3">
+      <input type="text" id="loginPhone" placeholder="رقم الهاتف" class="border rounded-lg px-3 py-2" required />
+      <input type="password" id="loginPassword" placeholder="كلمة المرور" class="border rounded-lg px-3 py-2" required />
+      <button class="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700">دخول</button>
+    </form>
+
+    <form id="registerForm" class="hidden flex-col gap-3">
+      <input type="text" id="regName" placeholder="الاسم / اسم المحل" class="border rounded-lg px-3 py-2" required />
+      <input type="text" id="regPhone" placeholder="رقم الهاتف" class="border rounded-lg px-3 py-2" required />
+      <input type="password" id="regPassword" placeholder="كلمة المرور" class="border rounded-lg px-3 py-2" required />
+      <input type="hidden" id="regRole" value="provider" />
+      <button class="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700">إنشاء حساب</button>
+    </form>
+  </section>
+
+  <!-- نموذج بيانات مقدم الخدمة (يظهر بعد تسجيل الدخول) -->
+  <section id="providerFormSection" class="hidden bg-white rounded-xl shadow-sm p-6">
+    <h3 class="text-lg font-bold mb-4">بيانات محلك / خدمتك</h3>
+    <form id="providerForm" class="flex flex-col gap-3">
+      <input type="text" id="shopName" placeholder="اسم المحل" class="border rounded-lg px-3 py-2" required />
+
+      <select id="category" class="border rounded-lg px-3 py-2" required>
+        <option value="">اختر التخصص</option>
+        <option>تبريد وتكييف</option>
+        <option>سباكة</option>
+        <option>كهرباء</option>
+        <option>صيانة إلكترونيات</option>
+        <option>صيانة هواتف وحاسبات</option>
+        <option>نجارة</option>
+        <option>دهان</option>
+        <option>أخرى</option>
+      </select>
+
+      <textarea id="description" placeholder="وصف مختصر عن خدماتك" class="border rounded-lg px-3 py-2" rows="3"></textarea>
+      <input type="text" id="phone" placeholder="رقم الهاتف للعرض للزبائن" class="border rounded-lg px-3 py-2" required />
+      <input type="text" id="whatsapp" placeholder="رقم واتساب (اختياري، بصيغة دولية)" class="border rounded-lg px-3 py-2" />
+      <input type="text" id="address" placeholder="العنوان التقريبي" class="border rounded-lg px-3 py-2" />
+
+      <label class="text-sm font-medium mt-2">حدد موقعك على الخريطة (اضغط على المكان الصحيح)</label>
+      <div id="pickMap" class="w-full h-64 rounded-lg border"></div>
+      <p id="coordsDisplay" class="text-xs text-gray-500"></p>
+
+      <button type="submit" class="bg-blue-600 text-white rounded-lg px-4 py-2 mt-2 hover:bg-blue-700">
+        حفظ البيانات
+      </button>
+    </form>
+    <p id="saveStatus" class="text-sm mt-3"></p>
+  </section>
+
+</main>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>
